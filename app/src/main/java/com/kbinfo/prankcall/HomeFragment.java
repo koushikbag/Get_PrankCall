@@ -10,11 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class HomeFragment extends Fragment {
 
     private Context mContext;
     private static HomeFragment mHomeFragmentInstance;
+    private AdView mAdView;
 
     private void HomeFragment(){}
 
@@ -43,6 +51,9 @@ public class HomeFragment extends Fragment {
         final EditText etName = view.findViewById(R.id.et_name);
         final EditText etMobileNumber = view.findViewById(R.id.et_mobile_number);
         Button btnStartCall = view.findViewById(R.id.btn_call_me);
+        mAdView = view.findViewById(R.id.adView);
+//        mAdView.setAdSize(AdSize.BANNER);
+//        mAdView.setAdUnitId(getString(R.string.banner_home));
 
         btnStartCall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,16 +67,71 @@ public class HomeFragment extends Fragment {
                     callAcceptFragment.setArguments(bundle);
                     getFragmentManager().beginTransaction()
                             .add(R.id.fragment_container, callAcceptFragment)
+                            .addToBackStack("accept")
                             .commit();
                 }
             }
         });
+
+        AdRequest adRequest = new AdRequest.Builder()
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                // Check the LogCat to get your test device ID
+                //.addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+                .build();
+
+       /* mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+            }
+
+            @Override
+            public void onAdClosed() {
+                Toast.makeText(mContext, "Ad is closed!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(mContext, "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Toast.makeText(mContext, "Ad left application!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+        });*/
+
+        mAdView.loadAd(adRequest);
+
         return view;
     }
 
     @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
     public void onDestroy() {
-        super.onDestroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         mContext = null;
+        super.onDestroy();
     }
 }

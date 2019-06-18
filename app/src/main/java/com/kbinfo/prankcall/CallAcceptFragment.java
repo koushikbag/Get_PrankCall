@@ -9,17 +9,26 @@ import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class CallAcceptFragment extends Fragment {
     private Context mContext;
     private static CallAcceptFragment mCallAcceptFragmentInstance;
     private String name = "";
     private String mobileNumber = "";
+    private AdView mAdView;
 
     private void CallAcceptFragment() {
     }
@@ -48,13 +57,21 @@ public class CallAcceptFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_call_accept, container, false);
         TextView tvName = view.findViewById(R.id.tv_name);
         TextView tvNumber = view.findViewById(R.id.tv_mobile_number);
-        Button btnAccept = view.findViewById(R.id.btn_accept);
-        Button btnDecline = view.findViewById(R.id.btn_decline);
+        ImageButton btnAccept = view.findViewById(R.id.btn_accept);
+        mAdView = view.findViewById(R.id.adv_call_start);
+       // mAdView.setAdSize(AdSize.BANNER);
+        //mAdView.setAdUnitId(getString(R.string.banner_call_start));
         Bundle bundle = getArguments();
 
         if (bundle != null) {
             name = bundle.getString("name");
             mobileNumber = bundle.getString("mobile_number");
+
+            if (name.isEmpty()){
+                name = "Unknown";
+            }
+            if (mobileNumber != null && mobileNumber.isEmpty())
+                mobileNumber = "+91 9011020304";
 
             tvName.setText(name);
             tvNumber.setText(mobileNumber);
@@ -67,6 +84,7 @@ public class CallAcceptFragment extends Fragment {
 
         r.play();
         vibe.vibrate(pattern, 0);
+
         /*if (Build.VERSION.SDK_INT >= 26) {
             vibe.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
@@ -90,33 +108,95 @@ public class CallAcceptFragment extends Fragment {
                 callDeclineFragment.setArguments(bundle);
                 if (getFragmentManager() != null) {
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, callDeclineFragment)
+                            .add(R.id.fragment_container, callDeclineFragment)
+                            .addToBackStack("decline")
                             .commit();
                 }
             }
         });
 
-        btnDecline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (r.isPlaying()) {
-                    r.stop();
-                }
-                vibe.cancel();
 
-                if (getFragmentManager() != null) {
-                    getFragmentManager().popBackStack();
+        /*btnAccept.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                *//*switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        Log.d("AcceptFragment: ", "Action down");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Log.d("AcceptFragment: ", "Action up");
+                        break;
+                }*//*
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Log.d("AcceptFragment: ", "Action down");
+                    return true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Log.d("AcceptFragment: ", "Action up");
+                    return true;
                 }
+                return false;
             }
-        });
+        });*/
+        AdRequest adRequest = new AdRequest.Builder()
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                // Check the LogCat to get your test device ID
+                //.addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+                .build();
+
+        /*mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+            }
+
+            @Override
+            public void onAdClosed() {
+                Toast.makeText(mContext, "Ad is closed!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(mContext, "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Toast.makeText(mContext, "Ad left application!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+        });*/
+
+        mAdView.loadAd(adRequest);
 
         return view;
     }
 
     @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
     public void onDestroy() {
-        super.onDestroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         mContext = null;
-        mCallAcceptFragmentInstance = null;
+        super.onDestroy();
     }
 }

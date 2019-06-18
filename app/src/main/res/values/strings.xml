@@ -2,5 +2,13 @@
     <string name="app_name">Prank Call to Myself</string>
     <string name="name">Name</string>
     <string name="mobile_number">Mobile Number*</string>
-    <string name="start_timer">Start Timer</string>
+    <string name="start_timer">Activate Prank Call </string>
+    <string name="swipe_up_to_answer">Swipe up to answer</string>
+    <string name="swipe_down_to_reject">Swipe down to reject</string>
+
+    <string name="add_mob_id">ca-app-pub-3821928706828933~3437558347</string>
+    <string name="banner_home">ca-app-pub-3821928706828933/2176447568</string>
+    <string name="banner_call_start">ca-app-pub-3821928706828933/6152965991</string>
+    <string name="banner_call_end">ca-app-pub-3821928706828933/8395985953</string>
+    <string name="call_end_fullscreen">ca-app-pub-3821928706828933/5905553986</string>
 </resources>
