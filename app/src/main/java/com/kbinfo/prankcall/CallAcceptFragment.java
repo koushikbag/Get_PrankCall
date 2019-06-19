@@ -80,8 +80,8 @@ public class CallAcceptFragment extends Fragment {
         final Vibrator vibe = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         long[] pattern = {500, 500, 500, 500, 500};
 
-        //r.play();
-        //vibe.vibrate(pattern, 0);
+        r.play();
+        vibe.vibrate(pattern, 0);
 
         /*if (Build.VERSION.SDK_INT >= 26) {
             vibe.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
