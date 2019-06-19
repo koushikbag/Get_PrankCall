@@ -2,9 +2,6 @@ package com.kbinfo.prankcall;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +11,26 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
 
     private Context mContext;
     private static HomeFragment mHomeFragmentInstance;
     private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
+    private AdRequest adRequest;
 
-    private void HomeFragment(){}
+    private void HomeFragment() {
+    }
 
-    public static HomeFragment getInstance(){
-        if (mHomeFragmentInstance == null){
+    public static HomeFragment getInstance() {
+        if (mHomeFragmentInstance == null) {
             mHomeFragmentInstance = new HomeFragment();
         }
         return mHomeFragmentInstance;
@@ -52,8 +55,10 @@ public class HomeFragment extends Fragment {
         final EditText etMobileNumber = view.findViewById(R.id.et_mobile_number);
         Button btnStartCall = view.findViewById(R.id.btn_call_me);
         mAdView = view.findViewById(R.id.adView);
-//        mAdView.setAdSize(AdSize.BANNER);
-//        mAdView.setAdUnitId(getString(R.string.banner_home));
+        /*mInterstitialAd = new InterstitialAd(mContext);
+
+        // set the ad unit ID
+        mInterstitialAd.setAdUnitId(getString(R.string.call_end_fullscreen));*/
 
         btnStartCall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,10 +78,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        AdRequest adRequest = new AdRequest.Builder()
+        adRequest = new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 // Check the LogCat to get your test device ID
-                //.addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+                //.addTestDevice("EEE580F95FFDE12539941C2E1AD22984")
+                .setRequestAgent("android_studio:ad_template")
                 .build();
 
        /* mAdView.setAdListener(new AdListener() {
@@ -102,6 +108,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onAdOpened() {
                 super.onAdOpened();
+                Toast.makeText(mContext, "Ad Opened", Toast.LENGTH_SHORT).show();
             }
         });*/
 
@@ -131,6 +138,8 @@ public class HomeFragment extends Fragment {
         if (mAdView != null) {
             mAdView.destroy();
         }
+        // Load ads into Interstitial Ads
+        //mInterstitialAd.loadAd(adRequest);
         mContext = null;
         super.onDestroy();
     }

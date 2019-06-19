@@ -6,12 +6,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -20,8 +15,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class CallAcceptFragment extends Fragment {
     private Context mContext;
@@ -59,7 +57,7 @@ public class CallAcceptFragment extends Fragment {
         TextView tvNumber = view.findViewById(R.id.tv_mobile_number);
         ImageButton btnAccept = view.findViewById(R.id.btn_accept);
         mAdView = view.findViewById(R.id.adv_call_start);
-       // mAdView.setAdSize(AdSize.BANNER);
+        // mAdView.setAdSize(AdSize.BANNER);
         //mAdView.setAdUnitId(getString(R.string.banner_call_start));
         Bundle bundle = getArguments();
 
@@ -67,7 +65,7 @@ public class CallAcceptFragment extends Fragment {
             name = bundle.getString("name");
             mobileNumber = bundle.getString("mobile_number");
 
-            if (name.isEmpty()){
+            if (name.isEmpty()) {
                 name = "Unknown";
             }
             if (mobileNumber != null && mobileNumber.isEmpty())
@@ -82,8 +80,8 @@ public class CallAcceptFragment extends Fragment {
         final Vibrator vibe = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         long[] pattern = {500, 500, 500, 500, 500};
 
-        r.play();
-        vibe.vibrate(pattern, 0);
+        //r.play();
+        //vibe.vibrate(pattern, 0);
 
         /*if (Build.VERSION.SDK_INT >= 26) {
             vibe.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -141,7 +139,8 @@ public class CallAcceptFragment extends Fragment {
         AdRequest adRequest = new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 // Check the LogCat to get your test device ID
-                //.addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+                //.addTestDevice("EEE580F95FFDE12539941C2E1AD22984")
+                .setRequestAgent("android_studio:ad_template")
                 .build();
 
         /*mAdView.setAdListener(new AdListener() {

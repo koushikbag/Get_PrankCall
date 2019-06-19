@@ -4,26 +4,21 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class CallDeclinedFragment extends Fragment {
     private Context mContext;
@@ -64,7 +59,7 @@ public class CallDeclinedFragment extends Fragment {
         ImageButton btnEndCall = view.findViewById(R.id.btn_end);
         mAdView = view.findViewById(R.id.adv_call_end);
         //mAdView.setAdSize(AdSize.BANNER);
-       // mAdView.setAdUnitId(getString(R.string.banner_call_end));
+        // mAdView.setAdUnitId(getString(R.string.banner_call_end));
 
         mInterstitialAd = new InterstitialAd(mContext);
 
@@ -75,9 +70,10 @@ public class CallDeclinedFragment extends Fragment {
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 // Check the LogCat to get your test device ID
                 //.addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+                .setRequestAgent("android_studio:ad_template")
                 .build();
 
-       /* mInterstitialAd.setAdListener(new AdListener() {
+        /*mInterstitialAd.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 showInterstitial();
             }
@@ -123,9 +119,9 @@ public class CallDeclinedFragment extends Fragment {
                 tvTime.setText("call finished");
 
                 // Load ads into Interstitial Ads
-                //mInterstitialAd.loadAd(adRequestFu);
+                mInterstitialAd.loadAd(adRequestFu);
 
-                Objects.requireNonNull(getActivity()).finish();
+                //Objects.requireNonNull(getActivity()).finish();
             }
 
         }.start();
@@ -145,7 +141,8 @@ public class CallDeclinedFragment extends Fragment {
         AdRequest adRequest = new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 // Check the LogCat to get your test device ID
-                //.addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+                //.addTestDevice("EEE580F95FFDE12539941C2E1AD22984")
+                .setRequestAgent("android_studio:ad_template")
                 .build();
 
         /*mAdView.setAdListener(new AdListener() {
@@ -185,7 +182,7 @@ public class CallDeclinedFragment extends Fragment {
         }
     }
 
-    public String checkDigit(int number) {
+    private String checkDigit(int number) {
         return (60 - number) <= 9 ? "0" + (60 - number) : String.valueOf(60 - number);
     }
 

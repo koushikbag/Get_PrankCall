@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "684940726862",
+    "firebase_url": "https://prank-call-to-myself.firebaseio.com",
+    "project_id": "prank-call-to-myself",
+    "storage_bucket": "prank-call-to-myself.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684940726862:android:0431023f61ba6e6f",
+        "android_client_info": {
+          "package_name": "com.kbinfo.prankcall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684940726862-ki6pu33s9n89qejprl3cg5fcfejvsb15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSl_fUop50q_c6vNW1XIxmlCZeiiP-4xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684940726862-ki6pu33s9n89qejprl3cg5fcfejvsb15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
