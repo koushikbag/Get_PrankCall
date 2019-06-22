@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_dark">
@@ -18,12 +17,23 @@
         android:paddingStart="17dp"
         android:paddingEnd="17dp" />
 
+    <CheckBox
+        android:id="@+id/cb_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_name"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="17dp"
+        android:text="@string/remember_this_name"
+        android:textColor="@color/colorAccent" />
+
     <EditText
         android:id="@+id/et_mobile_number"
         style="@style/HintText"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/et_name"
+        android:layout_below="@+id/cb_name"
         android:layout_marginStart="17dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="17dp"
@@ -33,21 +43,32 @@
         android:paddingStart="17dp"
         android:paddingEnd="17dp" />
 
+    <CheckBox
+        android:id="@+id/cb_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_mobile_number"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="17dp"
+        android:text="@string/remember_mobile_number"
+        android:textColor="@color/colorAccent" />
+
     <Button
         android:id="@+id/btn_call_me"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@+id/adView"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="90dp"
         android:layout_marginEnd="90dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/bg_prank_call_button"
         android:text="@string/start_timer"
         android:textAllCaps="false"
         android:textSize="18sp" />
 
-    <com.google.android.gms.ads.AdView
+    <!--<com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,6 +76,6 @@
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_home" />
-
+-->
 
 </RelativeLayout>

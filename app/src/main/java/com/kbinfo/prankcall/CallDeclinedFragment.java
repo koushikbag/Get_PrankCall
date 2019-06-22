@@ -25,8 +25,6 @@ public class CallDeclinedFragment extends Fragment {
     private static CallDeclinedFragment mCallDeclineFragmentInstance;
     private String name = "";
     private String mobileNumber = "";
-    private AdView mAdView;
-    private InterstitialAd mInterstitialAd;
 
     private void CallDeclinedFragment() {
     }
@@ -57,27 +55,6 @@ public class CallDeclinedFragment extends Fragment {
         TextView tvName = view.findViewById(R.id.tv_name_d);
         TextView tvNumber = view.findViewById(R.id.tv_mobile_number_d);
         ImageButton btnEndCall = view.findViewById(R.id.btn_end);
-        mAdView = view.findViewById(R.id.adv_call_end);
-        //mAdView.setAdSize(AdSize.BANNER);
-        // mAdView.setAdUnitId(getString(R.string.banner_call_end));
-
-        mInterstitialAd = new InterstitialAd(mContext);
-
-        // set the ad unit ID
-        mInterstitialAd.setAdUnitId(getString(R.string.call_end_fullscreen));
-
-        final AdRequest adRequestFu = new AdRequest.Builder()
-                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                // Check the LogCat to get your test device ID
-                //.addTestDevice("C04B1BFFB0774708339BC273F8A43708")
-                .setRequestAgent("android_studio:ad_template")
-                .build();
-
-        /*mInterstitialAd.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                showInterstitial();
-            }
-        });*/
 
         Bundle bundle = getArguments();
 
@@ -118,9 +95,6 @@ public class CallDeclinedFragment extends Fragment {
 
                 tvTime.setText("call finished");
 
-                // Load ads into Interstitial Ads
-                mInterstitialAd.loadAd(adRequestFu);
-
                 //Objects.requireNonNull(getActivity()).finish();
             }
 
@@ -129,84 +103,20 @@ public class CallDeclinedFragment extends Fragment {
         btnEndCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Load ads into Interstitial Ads
-                mInterstitialAd.loadAd(adRequestFu);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     Objects.requireNonNull(getActivity()).finish();
                 }
             }
         });
 
-        AdRequest adRequest = new AdRequest.Builder()
-                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                // Check the LogCat to get your test device ID
-                //.addTestDevice("EEE580F95FFDE12539941C2E1AD22984")
-                .setRequestAgent("android_studio:ad_template")
-                .build();
-
-        /*mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-            }
-
-            @Override
-            public void onAdClosed() {
-                Toast.makeText(mContext, "Ad is closed!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(mContext, "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                Toast.makeText(mContext, "Ad left application!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-        });*/
-
-        mAdView.loadAd(adRequest);
-
         return view;
-    }
-
-    private void showInterstitial() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
     }
 
     private String checkDigit(int number) {
         return (60 - number) <= 9 ? "0" + (60 - number) : String.valueOf(60 - number);
     }
-
-    @Override
-    public void onPause() {
-        if (mAdView != null) {
-            mAdView.pause();
-        }
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mAdView != null) {
-            mAdView.resume();
-        }
-    }
-
     @Override
     public void onDestroy() {
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
         mContext = null;
         super.onDestroy();
     }

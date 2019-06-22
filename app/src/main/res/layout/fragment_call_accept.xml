@@ -57,15 +57,6 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_caller_bg" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adv_call_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_face"
-        android:layout_centerHorizontal="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_call_start" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -11,11 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +21,8 @@ public class CallAcceptFragment extends Fragment {
     private static CallAcceptFragment mCallAcceptFragmentInstance;
     private String name = "";
     private String mobileNumber = "";
-    private AdView mAdView;
+    private Ringtone mRingtone;
+    private Vibrator mVibrator;
 
     private void CallAcceptFragment() {
     }
@@ -56,9 +52,6 @@ public class CallAcceptFragment extends Fragment {
         TextView tvName = view.findViewById(R.id.tv_name);
         TextView tvNumber = view.findViewById(R.id.tv_mobile_number);
         ImageButton btnAccept = view.findViewById(R.id.btn_accept);
-        mAdView = view.findViewById(R.id.adv_call_start);
-        // mAdView.setAdSize(AdSize.BANNER);
-        //mAdView.setAdUnitId(getString(R.string.banner_call_start));
         Bundle bundle = getArguments();
 
         if (bundle != null) {
@@ -76,17 +69,18 @@ public class CallAcceptFragment extends Fragment {
         }
 
         Uri phoneNotification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-        final Ringtone r = RingtoneManager.getRingtone(mContext, phoneNotification);
-        final Vibrator vibe = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+        mRingtone = RingtoneManager.getRingtone(mContext, phoneNotification);
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         long[] pattern = {500, 500, 500, 500, 500};
 
-        r.play();
-        vibe.vibrate(pattern, 0);
+        mRingtone.play();
+        if (mVibrator.hasVibrator())
+            mVibrator.vibrate(pattern, 0);
 
         /*if (Build.VERSION.SDK_INT >= 26) {
-            vibe.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+            mVibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
-            vibe.vibrate(pattern, -1);
+            mVibrator.vibrate(pattern, -1);
         }*/
 
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +91,12 @@ public class CallAcceptFragment extends Fragment {
                 bundle.putString("name", name);
                 bundle.putString("mobile_number", mobileNumber);
 
-                if (r.isPlaying()) {
-                    r.stop();
+                if (mRingtone.isPlaying()) {
+                    mRingtone.stop();
                 }
 
-                vibe.cancel();
+                if (mVibrator.hasVibrator())
+                    mVibrator.cancel();
 
                 callDeclineFragment.setArguments(bundle);
                 if (getFragmentManager() != null) {
@@ -113,89 +108,29 @@ public class CallAcceptFragment extends Fragment {
             }
         });
 
-
-        /*btnAccept.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                *//*switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        Log.d("AcceptFragment: ", "Action down");
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("AcceptFragment: ", "Action up");
-                        break;
-                }*//*
-
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.d("AcceptFragment: ", "Action down");
-                    return true;
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Log.d("AcceptFragment: ", "Action up");
-                    return true;
-                }
-                return false;
-            }
-        });*/
-        AdRequest adRequest = new AdRequest.Builder()
-                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                // Check the LogCat to get your test device ID
-                //.addTestDevice("EEE580F95FFDE12539941C2E1AD22984")
-                .setRequestAgent("android_studio:ad_template")
-                .build();
-
-        /*mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-            }
-
-            @Override
-            public void onAdClosed() {
-                Toast.makeText(mContext, "Ad is closed!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(mContext, "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                Toast.makeText(mContext, "Ad left application!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-        });*/
-
-        mAdView.loadAd(adRequest);
-
         return view;
     }
 
     @Override
     public void onPause() {
-        if (mAdView != null) {
-            mAdView.pause();
-        }
         super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mAdView != null) {
-            mAdView.resume();
+        if (mRingtone.isPlaying()) {
+            mRingtone.stop();
         }
+
+        if (mVibrator.hasVibrator())
+            mVibrator.cancel();
     }
 
     @Override
     public void onDestroy() {
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
         mContext = null;
+        if (mRingtone.isPlaying()) {
+            mRingtone.stop();
+        }
+
+        if (mVibrator.hasVibrator())
+            mVibrator.cancel();
         super.onDestroy();
     }
 }

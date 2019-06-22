@@ -6,10 +6,14 @@
     <string name="swipe_up_to_answer">Swipe up to answer</string>
     <string name="swipe_down_to_reject">Swipe down to reject</string>
 
-    <!--<string name="add_mob_id">ca-app-pub-3821928706828933~3437558347</string>-->
     <string name="add_mob_id">ca-app-pub-3821928706828933~3437558347</string>
     <string name="banner_home">ca-app-pub-3821928706828933/9068927467</string>
-    <string name="banner_call_start">ca-app-pub-3821928706828933/9068927467</string>
-    <string name="banner_call_end">ca-app-pub-3821928706828933/9068927467</string>
     <string name="call_end_fullscreen">ca-app-pub-3821928706828933/6606415659</string>
+    <string name="remember_this_name">Remember name</string>
+    <string name="remember_mobile_number">Remember mobile number</string>
+
+    <!-- For testing purpose use this -->
+    <!--<string name="add_mob_id"> ca-app-pub-3940256099942544~3347511713</string>
+    <string name="banner_home">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="call_end_fullscreen">ca-app-pub-3940256099942544/1033173712</string>-->
 </resources>
