@@ -1,6 +1,7 @@
 package com.kbinfo.prankcall;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,8 +80,12 @@ public class PrankMainActivity extends AppCompatActivity {
         if (mAdView != null) {
             mAdView.pause();
         }
-        // Load ads into Interstitial Ads
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+            Log.d("PrankMainActivity: ", "Loaded Succesfully");
+        } else {
+            Log.d("PrankMainActivity: ", "The interstitial wasn't loaded yet.");
+        }
         super.onPause();
     }
 

@@ -9,12 +9,17 @@ import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.kbinfo.prankcall.util.MyBounceInterpolator;
 
 public class CallAcceptFragment extends Fragment {
     private Context mContext;
@@ -102,11 +107,18 @@ public class CallAcceptFragment extends Fragment {
                 if (getFragmentManager() != null) {
                     getFragmentManager().beginTransaction()
                             .add(R.id.fragment_container, callDeclineFragment)
-                            .addToBackStack("decline")
                             .commit();
                 }
             }
         });
+
+        final Animation myAnim = AnimationUtils.loadAnimation(mContext, R.anim.bounce);
+        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+        //myAnim.setRepeatCount(Animation.INFINITE);
+        //myAnim.setRepeatMode(AlphaAnimation.INFINITE);
+        btnAccept.startAnimation(myAnim);
 
         return view;
     }

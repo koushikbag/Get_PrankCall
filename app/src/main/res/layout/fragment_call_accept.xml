@@ -3,7 +3,9 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_dark">
+    android:background="@color/bg_dark"
+    android:clickable="true"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/tv_incoming_call"
@@ -45,7 +47,7 @@
         android:layout_marginEnd="17dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="+91 9090909090"
+        android:text="+91 99999999990"
         android:textColor="@color/edit_text_color"
         android:textSize="16sp" />
 
@@ -81,9 +83,10 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/bg_circular_accept"
             android:scaleType="centerInside"
+            android:layout_marginBottom="10dp"
             android:src="@drawable/ic_call_accept" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tv_decline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,6 +95,6 @@
             android:layout_marginTop="10dp"
             android:text="@string/swipe_down_to_reject"
             android:textColor="@color/hinttext"
-            android:textSize="14sp" />
+            android:textSize="14sp" />-->
     </RelativeLayout>
 </RelativeLayout>
