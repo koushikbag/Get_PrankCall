@@ -1,14 +1,19 @@
 package com.kbinfo.prankcall;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -105,9 +110,15 @@ public class CallAcceptFragment extends Fragment {
 
                 callDeclineFragment.setArguments(bundle);
                 if (getFragmentManager() != null) {
-                    getFragmentManager().beginTransaction()
-                            .add(R.id.fragment_container, callDeclineFragment)
-                            .commit();
+                    if (mContext instanceof PrankMainActivity) {
+                        getFragmentManager().beginTransaction()
+                                .add(R.id.fragment_container, callDeclineFragment)
+                                .commit();
+                    } else {
+                        getFragmentManager().beginTransaction()
+                                .add(R.id.fragment_call_container, callDeclineFragment)
+                                .commit();
+                    }
                 }
             }
         });

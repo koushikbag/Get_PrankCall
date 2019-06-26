@@ -81,9 +81,9 @@
             android:layout_height="65dp"
             android:layout_below="@+id/tv_accept"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/bg_circular_accept"
             android:scaleType="centerInside"
-            android:layout_marginBottom="10dp"
             android:src="@drawable/ic_call_accept" />
 
         <!--<TextView
@@ -97,4 +97,5 @@
             android:textColor="@color/hinttext"
             android:textSize="14sp" />-->
     </RelativeLayout>
+
 </RelativeLayout>

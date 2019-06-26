@@ -1,5 +1,8 @@
 package com.kbinfo.prankcall;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -41,7 +44,7 @@ public class PrankMainActivity extends AppCompatActivity {
                 .setRequestAgent("android_studio:ad_template")
                 .build();
 
-        mAdView.setAdListener(new AdListener() {
+        /*mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
             }
@@ -66,7 +69,7 @@ public class PrankMainActivity extends AppCompatActivity {
                 super.onAdOpened();
                 Toast.makeText(PrankMainActivity.this, "Ad Opened", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         mAdView.loadAd(adRequest);
 
@@ -79,12 +82,6 @@ public class PrankMainActivity extends AppCompatActivity {
     public void onPause() {
         if (mAdView != null) {
             mAdView.pause();
-        }
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-            Log.d("PrankMainActivity: ", "Loaded Succesfully");
-        } else {
-            Log.d("PrankMainActivity: ", "The interstitial wasn't loaded yet.");
         }
         super.onPause();
     }
@@ -102,6 +99,12 @@ public class PrankMainActivity extends AppCompatActivity {
         if (mAdView != null) {
             mAdView.destroy();
         }
+        /*if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+            Log.d("PrankMainActivity: ", "Loaded Succesfully");
+        } else {
+            Log.d("PrankMainActivity: ", "The interstitial wasn't loaded yet.");
+        }*/
         super.onDestroy();
     }
 }

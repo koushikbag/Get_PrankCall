@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_call_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    tools:context=".PrankMainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_incoming_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="17dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Incoming call"
+            android:textColor="@color/edit_text_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_incoming_call"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="17dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Unknown"
+            android:textColor="@color/edit_text_color"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/tv_mobile_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="17dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="+91 99999999990"
+            android:textColor="@color/edit_text_color"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_face"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_caller_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/adViewCall"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/tv_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:text="@string/swipe_up_to_answer"
+                android:textColor="@color/hinttext"
+                android:textSize="14sp" />
+
+            <ImageButton
+                android:id="@+id/btn_accept"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_below="@+id/tv_accept"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_circular_accept"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_call_accept" />
+
+            <!--<TextView
+                android:id="@+id/tv_decline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_accept"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/swipe_down_to_reject"
+                android:textColor="@color/hinttext"
+                android:textSize="14sp" />-->
+        </RelativeLayout>
+
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_home" />
+    </RelativeLayout>
+
+</FrameLayout>
