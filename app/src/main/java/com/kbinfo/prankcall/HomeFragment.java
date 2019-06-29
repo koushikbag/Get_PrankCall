@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +26,6 @@ import com.kbinfo.prankcall.util.SharedPref;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -152,7 +150,7 @@ public class HomeFragment extends Fragment {
                     Log.d("PrankMainActivity: ", "The interstitial wasn't loaded yet.");
                 }
 
-                if (getActivity() != null){
+                if (getActivity() != null) {
                     getActivity().finish();
                 }
             }

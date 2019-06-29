@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CallScreenActivity"></activity>
+        <activity
+            android:name=".CallScreenActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -27,7 +29,9 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/add_mob_id" />
 
-        <activity android:name=".PrankMainActivity">
+        <activity
+            android:name=".PrankMainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

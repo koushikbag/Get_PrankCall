@@ -10,15 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 public class CallDeclinedFragment extends Fragment {
     private Context mContext;
@@ -115,6 +111,7 @@ public class CallDeclinedFragment extends Fragment {
     private String checkDigit(int number) {
         return (60 - number) <= 9 ? "0" + (60 - number) : String.valueOf(60 - number);
     }
+
     @Override
     public void onDestroy() {
         mContext = null;

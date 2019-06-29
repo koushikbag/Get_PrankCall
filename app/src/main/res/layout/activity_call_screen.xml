@@ -111,7 +111,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_home" />
+            ads:adUnitId="@string/banner_call_screen" />
     </RelativeLayout>
 
 </FrameLayout>

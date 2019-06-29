@@ -1,10 +1,6 @@
 package com.kbinfo.prankcall;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +9,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 
 public class PrankMainActivity extends AppCompatActivity {
 
@@ -25,26 +20,26 @@ public class PrankMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MobileAds.initialize(this, getString(R.string.add_mob_id));
+        //MobileAds.initialize(this, getString(R.string.add_mob_id));
 
         //ad view implementaion here
         mAdView = findViewById(R.id.adView);
-        mInterstitialAd = new InterstitialAd(this);
+        /*mInterstitialAd = new InterstitialAd(this);
 
         // set the ad unit ID
         mInterstitialAd.setAdUnitId(getString(R.string.call_end_fullscreen));
 
         // Load ads into Interstitial Ads
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());*/
 
         adRequest = new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 // Check the LogCat to get your test device ID
                 //.addTestDevice("EEE580F95FFDE12539941C2E1AD22984")
-                .setRequestAgent("android_studio:ad_template")
+                //.setRequestAgent("android_studio:ad_template")
                 .build();
 
-        /*mAdView.setAdListener(new AdListener() {
+        mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
             }
@@ -69,7 +64,7 @@ public class PrankMainActivity extends AppCompatActivity {
                 super.onAdOpened();
                 Toast.makeText(PrankMainActivity.this, "Ad Opened", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
         mAdView.loadAd(adRequest);
 

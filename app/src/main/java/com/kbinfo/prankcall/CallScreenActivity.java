@@ -6,7 +6,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 import com.kbinfo.prankcall.util.MyBounceInterpolator;
 
 public class CallScreenActivity extends AppCompatActivity {
@@ -129,12 +127,12 @@ public class CallScreenActivity extends AppCompatActivity {
         if (mAdView != null) {
             mAdView.destroy();
         }
-        if (mInterstitialAd.isLoaded()) {
+        /*if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
             Log.d("PrankMainActivity: ", "Loaded Succesfully");
         } else {
             Log.d("PrankMainActivity: ", "The interstitial wasn't loaded yet.");
-        }
+        }*/
         super.onDestroy();
     }
 
@@ -145,7 +143,7 @@ public class CallScreenActivity extends AppCompatActivity {
     }
 
     private void setAdParams() {
-        MobileAds.initialize(this, getString(R.string.add_mob_id));
+        //MobileAds.initialize(this, getString(R.string.add_mob_id));
         //ad view implementaion here
         mAdView = findViewById(R.id.adViewCall);
         mInterstitialAd = new InterstitialAd(this);
