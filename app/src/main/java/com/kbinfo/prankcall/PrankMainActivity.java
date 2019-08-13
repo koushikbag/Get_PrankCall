@@ -39,7 +39,7 @@ public class PrankMainActivity extends AppCompatActivity {
                 //.setRequestAgent("android_studio:ad_template")
                 .build();
 
-        mAdView.setAdListener(new AdListener() {
+        /*mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
             }
@@ -64,7 +64,7 @@ public class PrankMainActivity extends AppCompatActivity {
                 super.onAdOpened();
                 Toast.makeText(PrankMainActivity.this, "Ad Opened", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         mAdView.loadAd(adRequest);
 
